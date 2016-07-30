@@ -19,8 +19,8 @@ class UserRegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.cleaned_data['username']
-        if email and User.objects.filter(email=email).exclude(username=username).count():
+        # username = self.cleaned_data['username']
+        if email and User.objects.filter(email=email).count():
             raise forms.ValidationError(u'Email address must be unique.')
 
     def clean_password2(self):
