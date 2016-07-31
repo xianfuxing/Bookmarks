@@ -12,7 +12,7 @@ class LoginForm(forms.Form):
 class UserRegistrationForm(forms.ModelForm):
     MIN_LENGTH = 6
     MAX_LENGTH = 10
-    password_is_valid = False
+    password_is_valid = True
 
     password = forms.CharField(label='Password',
                                widget=forms.PasswordInput)
@@ -58,7 +58,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     def clean_password2(self):
         cd = self.cleaned_data
-        # print(cd)
+        print(cd)
         if not self.password_is_valid:
             return None
         if cd['password'] != cd['password2']:
@@ -66,13 +66,13 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 
-class UserEditForm(forms.Form):
+class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ('first_name', 'last_name', 'email')
 
 
-class ProfileEditForm(forms.Form):
+class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['date_of_birth', 'photo']
+        fields = ('date_of_birth', 'photo')

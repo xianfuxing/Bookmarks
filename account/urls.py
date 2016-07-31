@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from .views import dashboard, register
+from .views import dashboard, register, edit
 
 urlpatterns = [
     # post views
@@ -48,4 +48,5 @@ urlpatterns = [
         {'template_name': 'registration/b_password_reset_complete.html'},
         name='password_reset_complete'),
     url(r'^register/$', register, name='register'),
+    url(r'^edit/$', edit, name='edit'),
 ]
