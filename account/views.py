@@ -44,7 +44,6 @@ def register(request):
             # Set the chosen password
             new_user.set_password(
                 user_form.cleaned_data['password'])
-            print(type(new_user))
             # Save the User object
             new_user.save()
             return render(request,
