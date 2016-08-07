@@ -7,7 +7,17 @@
   <p>You can edit your account using the following form:</p>
   <form action="." method="post" enctype="multipart/form-data">
     {{ user_form.as_p }}
-    {{ profile_form.as_p }}
+    {% for field in profile_form %}
+      <p>
+        <label>{{ field.label }}:</label>
+        {% if field.label|lower == 'photo' and field.value %}
+          <p><img src="{{ field.value.url }}"></img></p>
+          <p><input id="id_photo" name="photo" type="file"></p>
+        {% else %}
+          {{ field }}
+        {% endif %}
+      </p>
+    {% endfor %}
     {% csrf_token %}
     <p><input type="submit" value="Save changes"></p>
   </form>
