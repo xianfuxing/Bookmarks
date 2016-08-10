@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -94,7 +95,13 @@ DATABASES = {
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    'social.backends.facebook.Facebook2OAuth2',
+    'social.backends.twitter.TwitterOAuth',
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '283508178676200'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd4ef16401968dea9f25df198d3813e5e'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
