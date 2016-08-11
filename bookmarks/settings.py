@@ -97,16 +97,21 @@ AUTHENTICATION_BACKENDS = (
     'account.authentication.EmailAuthBackend',
     'social.backends.facebook.Facebook2OAuth2',
     'social.backends.twitter.TwitterOAuth',
+    'social.backends.google.GoogleOAuth2',
 )
 
-# Facebook auth
+# Facebook oauth
 SOCIAL_AUTH_FACEBOOK_KEY = '283508178676200'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd4ef16401968dea9f25df198d3813e5e'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
-# Twitter auth
+# Twitter oauth
 SOCIAL_AUTH_TWITTER_KEY = 'UDDuUaBnjFYHE6DCvHFZ0uKB8'
 SOCIAL_AUTH_TWITTER_SECRET = 'KZKEPepijJZHfteRLg0tFfdoVefTVJF5PbRYhOX0SIdtklWOkg'
+
+# Google oauth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '257621999517-fl029r0tk60pf3dc5akkh14snneetisg.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'f862wsrUQ2_4YGsiDtDks8jU'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
