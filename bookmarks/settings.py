@@ -100,6 +100,19 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
 )
 
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'app.utils.create_profile'  # Custom pipeline
+)
+
 # Facebook oauth
 SOCIAL_AUTH_FACEBOOK_KEY = '283508178676200'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd4ef16401968dea9f25df198d3813e5e'
