@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -91,6 +92,40 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social.backends.facebook.Facebook2OAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.google.GoogleOAuth2',
+)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'app.utils.create_profile'  # Custom pipeline
+)
+
+# Facebook oauth
+SOCIAL_AUTH_FACEBOOK_KEY = '283508178676200'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd4ef16401968dea9f25df198d3813e5e'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+# Twitter oauth
+SOCIAL_AUTH_TWITTER_KEY = 'UDDuUaBnjFYHE6DCvHFZ0uKB8'
+SOCIAL_AUTH_TWITTER_SECRET = 'KZKEPepijJZHfteRLg0tFfdoVefTVJF5PbRYhOX0SIdtklWOkg'
+
+# Google oauth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '257621999517-fl029r0tk60pf3dc5akkh14snneetisg.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'f862wsrUQ2_4YGsiDtDks8jU'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -125,6 +160,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 EMAIL_HOST = 'smtp.126.com'
 EMAIL_HOST_USER = 'xianfuxing@126.com'
