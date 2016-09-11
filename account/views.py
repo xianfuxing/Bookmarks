@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -37,7 +39,11 @@ def dashboard(request):
 
 
 def logout(request):
-    return render(request, 'registration/logged_out.html')
+    if request.user.is_authenticated():
+        auth_logout(request)
+        return render(request, 'registration/logged_out.html')
+    return redirect_to_login('/account/',
+                             reverse('login'))
 
 
 def register(request):

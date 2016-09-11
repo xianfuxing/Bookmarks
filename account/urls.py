@@ -1,6 +1,10 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from .views import dashboard, register, edit
+from .views import dashboard, register, edit, logout
+
+
+from .decorators import refresh_redirect
+auth_views.logout = refresh_redirect(auth_views.logout)
 
 urlpatterns = [
     # post views
